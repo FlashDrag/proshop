@@ -11,6 +11,9 @@ An Ecommerce web app based on Django Rest and React.js
 - [React.js](https://reactjs.org/) - A JavaScript library for building user interfaces
 - [React Bootstrap](https://react-bootstrap.github.io/) - Bootstrap-based frontend framework for React
 - [Bootswatch](https://bootswatch.com/) - Free themes for Bootstrap.
+- [Font Awesome](https://fontawesome.com/) - The web's icon set and toolkit.
+- [React Router](https://reactrouter.com/) - Declarative routing for React.
+- [React Router Bootstrap](https://www.npmjs.com/package/react-router-bootstrap) - Integration between React Router and React Bootstrap.
 
 
 ## Development Setup
@@ -40,3 +43,8 @@ $ npm install react-bootstrap
 ##### Font Awesome
 - Go to [cdnjs](https://cdnjs.com/) and search for font-awesome
 - Copy the link tag and paste it in the index.html file
+##### React Router
+- Install react-router-dom and react-router-bootstrap
+```bash
+$ npm install react-router-dom react-router-bootstrap
+```
