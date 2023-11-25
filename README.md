@@ -4,8 +4,9 @@ An Ecommerce web app based on Django Rest and React.js
 
 ## Tools and Technologies
 ### Backend
-- Django Rest Framework
-- PostgreSQL
+- [Django Rest Framework](https://www.django-rest-framework.org/) - The web framework for building APIs with Django
+- [PostgreSQL](https://www.postgresql.org/) - The database for storing data
+
 
 ### Frontend
 - [React.js](https://reactjs.org/) - A JavaScript library for building user interfaces
@@ -47,4 +48,23 @@ $ npm install react-bootstrap
 - Install react-router-dom and react-router-bootstrap
 ```bash
 $ npm install react-router-dom react-router-bootstrap
+```
+
+### Backend
+#### Prerequisites
+- Python
+- pip
+- virtualenvwrapper
+#### Steps
+- Create a virtual environment
+```bash
+$ mkvirtualenv proshop
+```
+- Install Django and Django Rest Framework
+```bash
+$ pip install django djangorestframework
+```
+- Create a django project
+```bash
+$ django-admin startproject backend
 ```
