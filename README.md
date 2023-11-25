@@ -15,6 +15,7 @@ An Ecommerce web app based on Django Rest and React.js
 - [Font Awesome](https://fontawesome.com/) - The web's icon set and toolkit.
 - [React Router](https://reactrouter.com/) - Declarative routing for React.
 - [React Router Bootstrap](https://www.npmjs.com/package/react-router-bootstrap) - Integration between React Router and React Bootstrap.
+- [Axios](https://axios-http.com/docs) - Promise based HTTP client for the browser and node.js
 
 
 ## Development Setup
@@ -48,6 +49,11 @@ $ npm install react-bootstrap
 - Install react-router-dom and react-router-bootstrap
 ```bash
 $ npm install react-router-dom react-router-bootstrap
+```
+##### Axios
+- Install axios
+```bash
+$ npm install axios
 ```
 
 ### Backend
