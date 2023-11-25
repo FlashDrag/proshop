@@ -56,6 +56,11 @@ $ npm install react-router-dom react-router-bootstrap
 ```bash
 $ npm install axios
 ```
+- Add a proxy in the package.json file
+```json
+"name": "frontend",
+"proxy": "http://localhost:8000",
+```
 
 ### Backend
 #### Prerequisites
