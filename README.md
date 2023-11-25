@@ -80,16 +80,17 @@ $ pip install django djangorestframework
 ```bash
 $ django-admin startproject backend
 ```
-- Install django-cors-headers
-```bash
-$ pip install django-cors-headers
-```
+- django-cors-headers
+    - Install the package
+        ```bash
+        $ pip install django-cors-headers
+        ```
     - Add `corsheaders` to `INSTALLED_APPS` in `settings.py`
     - Add `corsheaders.middleware.CorsMiddleware` to `MIDDLEWARE` in `settings.py`
     - Add allowed hosts
-    ```python
-    CORS_ALLOWED_ORIGINS = [
-        "http://localhost:3000",
-    ]
-    ```
+        ```python
+            CORS_ALLOWED_ORIGINS = [
+                "http://localhost:3000",
+            ]
+        ```
 
