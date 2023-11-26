@@ -24,3 +24,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Review(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(
+        get_user_model(), on_delete=models.SET_NULL, null=True
+    )
+    name = models.CharField(max_length=200, null=True, blank=True)
+    rating = models.IntegerField(null=True, blank=True, default=0)
+    comment = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.rating)
