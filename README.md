@@ -6,6 +6,7 @@ An Ecommerce web app based on Django Rest and React.js
 ### Backend
 - [Django Rest Framework](https://www.django-rest-framework.org/) - The web framework for building APIs with Django
 - [Django cors headers](https://pypi.org/project/django-cors-headers/) - A Django App that adds Cross-Origin Resource Sharing (CORS) headers to responses
+- [Pillow](https://pillow.readthedocs.io/en/stable/) - Python Imaging Library
 - [PostgreSQL](https://www.postgresql.org/) - The database for storing data
 
 
