@@ -18,6 +18,7 @@ An Ecommerce web app based on Django Rest and React.js
 - [React Router](https://reactrouter.com/) - Declarative routing for React.
 - [React Router Bootstrap](https://www.npmjs.com/package/react-router-bootstrap) - Integration between React Router and React Bootstrap.
 - [Axios](https://axios-http.com/docs) - Promise based HTTP client for the browser and node.js
+- [Redux](https://redux.js.org/) - A Predictable State Container for JS Apps
 
 
 ## Development Setup
@@ -62,6 +63,12 @@ $ npm install axios
 "name": "frontend",
 "proxy": "http://localhost:8000",
 ```
+##### Redux
+- Install redux, react-redux, redux-thunk and redux-devtools-extension
+```bash
+$ npm install redux react-redux redux-thunk redux-devtools-extension
+```
+- Add the redux devtools extension to the chrome browser
 
 ### Backend
 #### Prerequisites
