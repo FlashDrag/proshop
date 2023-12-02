@@ -21,6 +21,13 @@ An Ecommerce web app based on Django Rest and React.js
 - [Redux](https://redux.js.org/) - A Predictable State Container for JS Apps
 
 
+## API Documentation
+The API documentation is created using [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/)
+
+- Swagger UI: <host>/api/docs/
+- ReDoc: <host>/api/redoc/
+- OpenAPI schema: <host>/api/schema/
+
 ## Development Setup
 ### Frontend
 #### Prerequisites
