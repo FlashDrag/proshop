@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
@@ -33,9 +38,14 @@ function CartScreen() {
     console.log("remove", id);
   };
 
+  const navigate = useNavigate();
+  const checkOutHandler = () => {
+    navigate("/login?redirect=shipping");
+  };
+
   return (
     <Row>
-      <Col md={8}>
+      <Col xs={{ order: "last" }} md={{ span: 8, order: "first" }}>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message variant="info">
@@ -96,9 +106,23 @@ function CartScreen() {
                 Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
                 items
               </h2>
-              ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed()}
+              $
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed()}
             </ListGroup.Item>
           </ListGroup>
+
+          <ListGroup.Item className="text-center">
+            <Button
+              type="button"
+              className="m-1"
+              disabled={cartItems.length === 0}
+              onClick={checkOutHandler}
+            >
+              Proceed To Checkout
+            </Button>
+          </ListGroup.Item>
         </Card>
       </Col>
     </Row>
