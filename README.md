@@ -7,6 +7,7 @@ An Ecommerce web app based on Django Rest and React.js
 - [Django Rest Framework](https://www.django-rest-framework.org/) - The web framework for building APIs with Django
 - [Django cors headers](https://pypi.org/project/django-cors-headers/) - A Django App that adds Cross-Origin Resource Sharing (CORS) headers to responses
 - [Pillow](https://pillow.readthedocs.io/en/stable/) - Python Imaging Library
+- [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/) - A JSON Web Token authentication plugin for the Django REST Framework
 - [PostgreSQL](https://www.postgresql.org/) - The database for storing data
 
 
@@ -108,4 +109,36 @@ $ django-admin startproject backend
                 "http://localhost:3000",
             ]
         ```
+##### Authentication
+**Note**: _The configuration uses only access tokens. Refresh tokens are not used._
+
+**Helper**: _Token encoder and decoder are available at [jwt.io](https://jwt.io/)_
+
+- Install djangorestframework-simplejwt
+```bash
+$ pip install djangorestframework-simplejwt
+```
+- Configure Django Rest Framework to use JWT as a default authentication mechanism in `settings.py`
+```python
+REST_FRAMEWORK = {
+    # ...
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # ...
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+    ...
+}
+```
+- Include routes for obtaining tokens in `base/urls.py`
+```python
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+urlpatterns = [
+    path('users/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # ...
+]
+```
+- Customize the JWT behavior in `settings.py`. See `SIMPLE_JWT` in [settings.py](backend/backend/settings.py)
+
+
 
