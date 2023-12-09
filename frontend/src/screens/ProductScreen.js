@@ -58,7 +58,7 @@ function ProductScreen() {
               <ListGroup.Item>
                 <Rating
                   value={product.rating}
-                  text={`${product.num_reviews} reviews`}
+                  text={`${product.numReviews} reviews`}
                   color={"#f8e825"}
                 />
               </ListGroup.Item>
@@ -87,12 +87,12 @@ function ProductScreen() {
                   <Row>
                     <Col>Status</Col>
                     <Col>
-                      {product.count_in_stock > 0 ? "In Stock" : "Out of Stock"}
+                      {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
                     </Col>
                   </Row>
                 </ListGroup.Item>
 
-                {product.count_in_stock > 0 && (
+                {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <Row>
                       <Col>Qty</Col>
@@ -102,7 +102,7 @@ function ProductScreen() {
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         >
-                          {[...Array(product.count_in_stock).keys()].map(
+                          {[...Array(product.countInStock).keys()].map(
                             (x) => (
                               <option key={x + 1} value={x + 1}>
                                 {x + 1}
@@ -119,7 +119,7 @@ function ProductScreen() {
                   <Button
                     onClick={addToCartHandler}
                     className="w-100"
-                    disabled={product.count_in_stock === 0}
+                    disabled={product.countInStock === 0}
                     type="button"
                   >
                     Add to Cart
