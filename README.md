@@ -116,7 +116,6 @@ $ django-admin startproject backend
         ```
 ### Authentication
 ##### Backend
-_Note: The configuration uses only access tokens. Refresh tokens are not used._
 
 _Helper: Token encoder and decoder are available at [jwt.io](https://jwt.io/)_
 
@@ -165,4 +164,5 @@ REST_FRAMEWORK = {
 
 
 ##### Frontend
+header: "Authorization: Bearer access_token"
 ...
