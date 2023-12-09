@@ -1,15 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
-
-# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/customizing_token_claims.html
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        data["email"] = self.user.email
-
-        return data
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -33,3 +25,47 @@ class UserSerializer(serializers.ModelSerializer):
         of the 'is_staff' field.
         """
         return obj.is_staff
+
+
+class UserSerializerWithToken(UserSerializer):
+    """
+    Extends the UserSerializer class to add a custom access 'token' field
+    """
+    token = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = get_user_model()
+        fields = ["id", "_id", "email", "name", "isAdmin", "token"]
+
+    def get_token(self, obj):
+        """
+        Set the value of the custom 'token' field to the value
+        """
+        # generate a new refresh and access token for
+        # the obj(which is a existing user)
+        token = RefreshToken.for_user(obj)
+        # return the access token
+        return str(token.access_token)
+
+
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/customizing_token_claims.html
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """
+    Override the default TokenObtainPairSerializer
+    to add custom claims from the UserSerializerWithToken
+    to the payload.
+
+    In client side, we can get the "access" or "token" key from the payload
+    data, as they both are access tokens and are interchangeable.
+    """
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        serializer = UserSerializerWithToken(self.user).data
+        for k, v in serializer.items():
+            data[k] = v
+
+        # Simple example of custom claim without a UserSerializer
+        # data["email"] = self.user.email
+
+        return data
