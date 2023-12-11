@@ -4,10 +4,11 @@ from rest_framework_simplejwt.views import (
 )
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from drf_spectacular.utils import extend_schema, OpenApiResponse
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserSerializerWithToken
 
 
 @extend_schema(
@@ -80,3 +81,22 @@ def getUserProfile(request):
     """
     serializer = UserSerializer(user)
     return Response(serializer.data)
+
+
+@extend_schema(
+    summary="Register new user",
+    responses={201: OpenApiResponse(response=UserSerializerWithToken())},
+    request=UserSerializerWithToken,
+)
+@api_view(["POST"])
+def registerUser(request):
+    """Register new user in the system"""
+
+    # if the serializer is valid, save the user and return the response
+    # otherwise return the bad request response with the serializer errors
+    serializer = UserSerializerWithToken(data=request.data)
+
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
