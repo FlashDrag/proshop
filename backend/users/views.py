@@ -1,9 +1,10 @@
+from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.views import (
     TokenObtainPairView as BaseTokenObtainPairView,
 )
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from drf_spectacular.utils import extend_schema, OpenApiResponse
 
 from .serializers import UserSerializer
@@ -42,6 +43,22 @@ class TokenObtainPairView(BaseTokenObtainPairView):
 
 
 @extend_schema(
+    summary="Users list",
+    responses={200: OpenApiResponse(response=UserSerializer(many=True))},
+)
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def getUsers(request):
+    """
+    List of all users in db.
+    Only for authenticated staff users.
+    """
+    users = get_user_model().objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+@extend_schema(
     summary="User details",
     responses={200: OpenApiResponse(response=UserSerializer())},
 )
@@ -51,7 +68,7 @@ class TokenObtainPairView(BaseTokenObtainPairView):
 # for all views in settings/REST_FRAMEWORK
 @permission_classes([IsAuthenticated])
 def getUserProfile(request):
-    """User profile details"""
+    """User profile details."""
     user = request.user
     """
     # the same as @permission_classes([IsAuthenticated])

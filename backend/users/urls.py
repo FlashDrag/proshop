@@ -8,5 +8,6 @@ urlpatterns = [
         views.TokenObtainPairView.as_view(),
         name="token_obtain_pair",
     ),
+    path("", views.getUsers, name="users-list"),
     path("profile/", views.getUserProfile, name="user-profile"),
 ]
