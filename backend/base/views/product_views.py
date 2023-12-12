@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema, OpenApiResponse
@@ -25,7 +26,7 @@ def getProducts(request):
 @api_view(["GET"])
 def getProduct(request, pk):
     """Product details"""
-    product = Product.objects.get_(_id=pk)
+    product = get_object_or_404(Product, _id=pk)
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
