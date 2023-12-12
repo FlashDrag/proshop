@@ -12,12 +12,12 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        exclude = ("num_reviews",  "count_in_stock", "created_at")
+        exclude = ("num_reviews",  "count_in_stock", "created_at", "user")
 
-    def get_numReviews(self, obj):
+    def get_numReviews(self, obj) -> int:
         return obj.num_reviews
 
-    def get_countInStock(self, obj):
+    def get_countInStock(self, obj) -> int:
         return obj.count_in_stock
 
     def get_createdAt(self, obj):

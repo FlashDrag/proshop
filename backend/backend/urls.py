@@ -21,7 +21,7 @@ urlpatterns = [
         name="redoc",
     ),
     path("admin/", admin.site.urls),
-    path("api/", include("base.urls")),
+    path("api/products/", include("base.urls.product_urls")),
     path("api/users/", include("users.urls")),
 ]
 
