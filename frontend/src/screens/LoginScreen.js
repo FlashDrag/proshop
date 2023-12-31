@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, redirect, useNavigate, useSearchParams } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -31,31 +31,33 @@ function LoginScreen() {
     dispatch(login(email, password))
   };
 
-
   return (
     <FormContainer>
       <h1>Sign In</h1>
-      {/* TODO: display error msg in correct format*/}
-      {/* {error && <Message variant='danger'>{error}</Message>} */}
-      {loading && <Loader />}
+      {error && error.detail && <Message variant='danger'>{error.detail}</Message>}
+      {loading && <Loader size={50} />}
 
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
           <Form.Label>Emal Address</Form.Label>
+          {error && error.email && <Alert className='p-0 text-danger bg-transparent border-0'>{error.email}</Alert>}
           <Form.Control
             type="email"
             placeholder="Enter Email"
             value={email}
+            {...(error && error.email && {isInvalid: true})}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="password" className="py-3">
           <Form.Label>Password</Form.Label>
+          {error && error.password && <Alert className='p-0 text-danger bg-transparent border-0'>{error.password}</Alert>}
           <Form.Control
             type="password"
             placeholder="Enter Password"
             value={password}
+            {...(error && error.password && {isInvalid: true})}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
