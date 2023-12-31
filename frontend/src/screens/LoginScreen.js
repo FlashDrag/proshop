@@ -13,12 +13,16 @@ function LoginScreen() {
 
   const dispatch = useDispatch();
 
+  // get redirect query param from url
   const [searchParams, setSearchParams] = useSearchParams();
   const redirect = searchParams.get('redirect') || '/';
 
   const userLogin = useSelector(state => state.userLogin)
   const {error, loading, userInfo} = userLogin;
 
+  // if user is logged in (userInfo is not null in redux store),
+  // redirect to the page they were on before,
+  // otherwise redirect to home
   const navigate = useNavigate();
   useEffect(() => {
     if (userInfo) {
@@ -26,6 +30,7 @@ function LoginScreen() {
     }
   }, [navigate, userInfo, redirect])
 
+  // submitHandler dispatches login action with email and password
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password))
