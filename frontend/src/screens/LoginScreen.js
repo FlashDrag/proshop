@@ -36,6 +36,7 @@ function LoginScreen() {
     dispatch(login(email, password))
   };
 
+  // TODO: add required to required fields after I complete testing backend required fields functionality
   return (
     <FormContainer>
       <h1>Sign In</h1>
@@ -76,7 +77,7 @@ function LoginScreen() {
         <Col>
           New Customer?
           <Link
-            to={redirect ? `/register?redirect=${redirect}` : "register/"}
+            to={redirect ? `/register?redirect=${redirect}` : "/register"}
             className="ps-2"
           >
             Register
