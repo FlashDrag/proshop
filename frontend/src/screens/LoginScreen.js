@@ -48,6 +48,7 @@ function LoginScreen() {
           <Form.Label>Emal Address</Form.Label>
           {error && error.email && <Alert className='p-0 text-danger bg-transparent border-0'>{error.email}</Alert>}
           <Form.Control
+            required
             type="email"
             placeholder="Enter Email"
             value={email}
@@ -60,6 +61,7 @@ function LoginScreen() {
           <Form.Label>Password</Form.Label>
           {error && error.password && <Alert className='p-0 text-danger bg-transparent border-0'>{error.password}</Alert>}
           <Form.Control
+            required
             type="password"
             placeholder="Enter Password"
             value={password}

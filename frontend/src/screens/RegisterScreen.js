@@ -13,7 +13,9 @@ function RegisterScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const [passwordsMatchError, setPasswordsMatchError] = useState("");
+  const [isConfirmPasswordInvalid, setIsConfirmPasswordInvalid] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -34,8 +36,9 @@ function RegisterScreen() {
     e.preventDefault();
     setPasswordsMatchError('');
 
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       setPasswordsMatchError('Passwords do not match!');
+      setIsConfirmPasswordInvalid(true);
     } else {
       dispatch(register(name, email, password))
     }
@@ -55,6 +58,7 @@ function RegisterScreen() {
             <Form.Label>Name</Form.Label>
             {error && error.name && <Alert className='p-0 mb-0 text-danger bg-transparent border-0'>{error.name}</Alert>}
             <Form.Control
+              required
               type="name"
               placeholder="Enter Name"
               value={name}
@@ -67,6 +71,7 @@ function RegisterScreen() {
               <Form.Label>Emal Address</Form.Label>
               {error && error.email && <Alert className='p-0 mb-0 text-danger bg-transparent border-0'>{error.email}</Alert>}
               <Form.Control
+                required
                 type="email"
                 placeholder="Enter Email"
                 value={email}
@@ -79,6 +84,8 @@ function RegisterScreen() {
             <Form.Label>Password</Form.Label>
             {error && error.password && <Alert className='p-0 mb-0 text-danger bg-transparent border-0'>{error.password}</Alert>}
             <Form.Control
+              required
+              minLength={5}
               type="password"
               placeholder="Enter Password"
               value={password}
@@ -89,13 +96,14 @@ function RegisterScreen() {
 
           <Form.Group controlId="passwordConfirm" className="py-1">
             <Form.Label>Confim Password</Form.Label>
-            {error && error.password && <Alert className='p-0 mb-0 text-danger bg-transparent border-0'>{error.password}</Alert>}
             <Form.Control
+              required
+              minLength={5}
               type="password"
               placeholder="Repeat Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              {...(error && error.password && {isInvalid: true})}
+              isInvalid={isConfirmPasswordInvalid || (error && error.password)}
             ></Form.Control>
           </Form.Group>
 
